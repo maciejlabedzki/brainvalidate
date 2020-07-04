@@ -52,3 +52,7 @@ body {
   border: 1px solid red;
   background: #fff9f9;
 }
+
+body.vsc-initialized {
+  background: #e4e4e4;
+}

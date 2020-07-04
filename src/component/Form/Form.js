@@ -43,7 +43,6 @@ const Form = ({ formReducer, dispatch }) => {
   };
 
   const handleUpdate = (name, value) => {
-    // controled update
     if (name === "firstName") {
       setFirstName(value);
     } else if (name === "lastName") {
@@ -55,14 +54,14 @@ const Form = ({ formReducer, dispatch }) => {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (validEmail()) {
       // Send data to reducer
       dispatch({
         type: "ADD_ALL",
-        payload: { firstName, lastName, email, event }
+        payload: { firstName, lastName, email, event },
       });
 
       // Send notification about send form
@@ -76,18 +75,18 @@ const Form = ({ formReducer, dispatch }) => {
   return (
     <>
       <h3>Form:</h3>
-      <form onSubmit={handleSubmit} validate={valid}>
-        {formPattern.map(item => {
+      <form className="event-form" onSubmit={handleSubmit} validate={valid}>
+        {formPattern.map((item) => {
           return (
-            <div key={item.id} className="form-row">
-              <label className="form-col">{item.label}:</label>
+            <div key={item.id} className="row">
+              <label className="col">{item.label}:</label>
               <input
-                className={"form-col form-input " + item.input.name}
+                className={"col" + item.input.name}
                 name={item.input.name}
                 type={item.input.type}
                 value={item.input.value}
                 placeholder={item.input.placeholder}
-                onChange={e => handleUpdate(item.input.name, e.target.value)}
+                onChange={(e) => handleUpdate(item.input.name, e.target.value)}
                 required={item.input.required}
                 min={item.input.min}
                 max={item.input.max}
@@ -104,8 +103,8 @@ const Form = ({ formReducer, dispatch }) => {
   );
 };
 
-var mapStateToProps = state => ({
-  formReducer: state.formReducer
+var mapStateToProps = (state) => ({
+  formReducer: state.formReducer,
 });
 
 export default connect(mapStateToProps)(Form);

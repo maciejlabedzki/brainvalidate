@@ -1,36 +1,7 @@
 import React from "react";
-//import { Provider } from "react-redux";
-// import { createStore, applyMiddleware } from "redux";
-// import ReduxThunk from "redux-thunk";
-// import logger from "redux-logger";
-
-// Style
-// import "./styles.css";
 
 // Component
 import Form from "./component/Form/Form.js";
-
-// Reducer
-// import rootReducer from "./reducers/index.js";
-
-// Store
-// const store = createStore(rootReducer, applyMiddleware(ReduxThunk, logger));
-
-// store.dispatch({ type: "ADD_FIRSTNAME", payload: "Micke" });
-// store.dispatch({ type: "ADD_LASTNAME", payload: "SWAN" });
-// store.dispatch({ type: "ADD_EMAIL", payload: "const@gmail.com" });
-// store.dispatch({
-//   type: "ADD_EVENT",
-//   payload: { name: "Live Stream", date: "2020-01-01", time: "08:00" }
-// });
-
-// console.log("store", store.getState());
-
-// console.clear();
-
-// const handleStore = () => {
-//   console.log(store.getState().formReducer);
-// };
 
 const App = () => {
   return (
@@ -41,3 +12,7 @@ const App = () => {
 };
 
 export default App;
+
+// this information about unclosed regular expression E015 was search to resolve
+// was set to just remove jshint notification about this error
+// this issue should be fix on the next state

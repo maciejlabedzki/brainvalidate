@@ -21,11 +21,11 @@ it("wyświetla dane użytkownika", async () => {
   const fakeUser = {
     name: "Jan Kowalski",
     age: "32",
-    address: "ul. Zimna 12, Pcim Dolny"
+    address: "ul. Zimna 12, Pcim Dolny",
   };
   jest.spyOn(global, "fetch").mockImplementation(() =>
     Promise.resolve({
-      json: () => Promise.resolve(fakeUser)
+      json: () => Promise.resolve(fakeUser),
     })
   );
 
@@ -34,9 +34,9 @@ it("wyświetla dane użytkownika", async () => {
     render(<User id="123" />, container);
   });
 
-  //expect(container.querySelector("summary").textContent).toBe(fakeUser.name);
+  expect(container.querySelector("summary").textContent).toBe(fakeUser.name);
 
-  // expect(container.querySelector("strong").textContent).toBe(fakeUser.age);
+  expect(container.querySelector("strong").textContent).toBe(fakeUser.age);
 
   expect(container.textContent).toContain(fakeUser.address);
 

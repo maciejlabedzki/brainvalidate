@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #e4e4e4;
+}
+
+.error {
+  color: red;
+  width: 100%;
+  border: 1px solid red;
+  display: block;
+  background-color: #ffeaea;
+}
+
+body {
+  margin: 0;
+  background: #e4e4e4;
+}
+
+//
+
+.event-form {
+  &[validate*="novalid-email"] input.email {
+    border: 1px solid red;
+    background: #fff9f9;
+  }
+  .col {
+    width: 100%;
+    background: white;
+    display: block;
+    float: left;
+    margin-bottom: 8px;
+    border: none;
+  }
+
+  input {
+    padding: 5px 10px;
+    margin: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: calc(100% - 20px);
+    float: left;
+  }
+
+  .row {
+    height: auto;
+    overflow: hidden;
+    display: block;
+    width: 100%;
+  }
+}
