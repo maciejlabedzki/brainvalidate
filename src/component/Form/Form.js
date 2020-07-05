@@ -65,7 +65,7 @@ const Form = ({ formReducer, dispatch }) => {
       });
 
       // Send notification about send form
-      toast.success("Form send.");
+      //toast.success("Form send.");
 
       // Clear form
       e.target.reset();
@@ -74,14 +74,15 @@ const Form = ({ formReducer, dispatch }) => {
 
   return (
     <>
-      <h3>Form:</h3>
+      <h3 className="page-title">Form:</h3>
       <form className="event-form" onSubmit={handleSubmit} validate={valid}>
         {formPattern.map((item) => {
           return (
             <div key={item.id} className="row">
-              <label className="col">{item.label}:</label>
+              <label className="col title">{item.label}:</label>
               <input
-                className={"col" + item.input.name}
+                className={"col " + item.input.name}
+                aria-label={item.input.name}
                 name={item.input.name}
                 type={item.input.type}
                 value={item.input.value}
@@ -95,10 +96,12 @@ const Form = ({ formReducer, dispatch }) => {
           );
         })}
 
-        <button type="submit">Send</button>
+        <button className="button-submit" type="submit">
+          Send
+        </button>
       </form>
 
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </>
   );
 };

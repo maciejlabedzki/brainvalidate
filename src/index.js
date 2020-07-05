@@ -21,11 +21,9 @@ const Root = ({ store, children }) => (
 );
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Root store={store}>
-      <App />
-    </Root>
-  </React.StrictMode>,
+  <Root store={store}>
+    <App />
+  </Root>,
   document.getElementById("root")
 );
 

@@ -6,8 +6,8 @@ const formPattern = [
       name: "firstName",
       type: "text",
       placeholder: "Name",
-      required: true
-    }
+      required: true,
+    },
   },
   {
     id: 1,
@@ -16,8 +16,8 @@ const formPattern = [
       name: "lastName",
       type: "text",
       placeholder: "Surname",
-      required: true
-    }
+      required: true,
+    },
   },
   {
     id: 2,
@@ -26,8 +26,8 @@ const formPattern = [
       name: "email",
       type: "text",
       placeholder: "email@gmail.com",
-      required: true
-    }
+      required: true,
+    },
   },
   {
     id: 3,
@@ -38,9 +38,9 @@ const formPattern = [
       placeholder: "2020-01-01",
       required: true,
       min: "2020-01-01",
-      max: "2020-08-08"
-    }
-  }
+      max: "2020-08-08",
+    },
+  },
 ];
 
 export default formPattern;
