@@ -38,7 +38,7 @@ const formPattern = [
       placeholder: "2020-01-01",
       required: true,
       min: "2020-01-01",
-      max: "2020-08-08",
+      max: "2020-12-31",
     },
   },
 ];

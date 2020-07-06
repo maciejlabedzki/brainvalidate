@@ -5,50 +5,39 @@ import React from "react";
 import { render, fireEvent, screen } from "./test-utils";
 import Form from "../component/Form/Form.js";
 
-import { act } from "react-dom/test-utils";
-
 it("Render component : 'First Name' input to be inside the form", () => {
-  //render(<Form />, { initialState: { user: "Redux User" } });
   render(<Form />);
-  //screen.debug(screen.getByLabelText("firstName"));
-  //expect(screen.getByLabelText("firstName")).toBeInTheDocument();
   expect(screen.getByLabelText("firstName")).toBeInTheDocument();
 });
 
 it("Render component : 'Last Name' input to be inside the form", () => {
   render(<Form />);
-  //expect(screen.getByText(/Last Name/i)).toBeInTheDocument();
-  //screen.debug(screen.getByLabelText("lastName"));
   expect(screen.getByLabelText("lastName")).toBeInTheDocument();
 });
 
 it("Render component : 'Email' input to be inside the form", () => {
   render(<Form />);
-  //expect(screen.getByText(/Email/i)).toBeInTheDocument();
   expect(screen.getByLabelText("email")).toBeInTheDocument();
 });
 
 it("Render component : 'Event' input to be inside the form", () => {
   render(<Form />);
-  //expect(screen.getByText(/Event/i)).toBeInTheDocument();
   expect(screen.getByLabelText("event")).toBeInTheDocument();
 });
 
-it("Render component : 'Send' button to be inside the form", () => {
+it("Render component : 'Submit' button to be inside the form", () => {
   render(<Form />);
-  expect(screen.getByText(/Send/i)).toBeInTheDocument();
+  expect(screen.getByLabelText("submit-button")).toBeInTheDocument();
 });
 
 it("Test submitted button click", () => {
   render(<Form />);
-  const button = screen.getByText(/Send/i);
-  //const button = screen.getByRole("submit");
+  const button = screen.getByLabelText("submit-button");
 
   screen.debug(button);
 
   fireEvent.click(button);
 
-  //wrapper.getByText(/Send/i)
   //   expect(screen.getByText(/Send/i)).toBeInTheDocument();
 
   //   const handleSubmit = const handleSubmit = jest.fn().mockImplementation((cb) => () => cb({ test: 'test' }));

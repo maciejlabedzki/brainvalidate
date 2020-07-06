@@ -5,11 +5,10 @@ import { connect } from "react-redux";
 import validateEmaill from "../../validation/email/Email.js";
 
 // Date today
-// import dateToday from "../../validation/date/Today.js";
+import dateToday from "../../validation/date/Today.js";
 
 // Lib: react-toastify
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 // Form Pattern
 import formPattern from "../../data/Form/form.js";
@@ -19,17 +18,17 @@ const Form = ({ formReducer, dispatch }) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [event, setEvent] = useState("");
-  // const [date, setDate] = useState("2020-01-01");
+  const [date, setDate] = useState("2020-01-01");
   const [valid, setValid] = useState("");
   // const [error, setError] = useState("");
 
   useEffect(() => {
-    // handleDate();
+    handleDate();
   }, []);
 
-  // const handleDate = () => {
-  //   setDate(dateToday);
-  // };
+  const handleDate = () => {
+    setDate(dateToday);
+  };
 
   const validEmail = () => {
     if (validateEmaill(email)) {
@@ -65,7 +64,7 @@ const Form = ({ formReducer, dispatch }) => {
       });
 
       // Send notification about send form
-      //toast.success("Form send.");
+      toast.success("Form send.");
 
       // Clear form
       e.target.reset();
@@ -89,19 +88,22 @@ const Form = ({ formReducer, dispatch }) => {
                 placeholder={item.input.placeholder}
                 onChange={(e) => handleUpdate(item.input.name, e.target.value)}
                 required={item.input.required}
-                min={item.input.min}
+                //min={item.input.min}
+                min={date}
                 max={item.input.max}
               />
             </div>
           );
         })}
 
-        <button className="button-submit" type="submit">
+        <button
+          className="button-submit"
+          aria-label="submit-button"
+          type="submit"
+        >
           Send
         </button>
       </form>
-
-      {/* <ToastContainer /> */}
     </>
   );
 };

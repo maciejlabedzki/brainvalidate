@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /server/node_modules
+/mongo/node_modules
 /.pnp
 .pnp.js
 
