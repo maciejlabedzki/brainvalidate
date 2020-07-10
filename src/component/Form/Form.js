@@ -23,6 +23,7 @@ const Form = ({ dispatch }) => {
   const [today, setToday] = useState("2020-01-01");
   const [valid, setValid] = useState("");
   const [submit, setSubmit] = useState(false);
+  // const element on the
   // const [error, setError] = useState("");
 
   useEffect(() => {
