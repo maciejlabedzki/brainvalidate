@@ -22,7 +22,7 @@ const Form = ({ dispatch }) => {
   const [date, setDate] = useState("2020-01-01");
   const [today, setToday] = useState("2020-01-01");
   const [valid, setValid] = useState("");
-  const [submit, setSubmit] = useState("");
+  const [submit, setSubmit] = useState(false);
   // const [error, setError] = useState("");
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const Form = ({ dispatch }) => {
   const validEmail = () => {
     console.log("email", email);
     if (validateEmail(email)) {
-      setValid("");
+      setValid("true");
       return true;
     } else {
       setValid("novalid-email");
@@ -73,6 +73,20 @@ const Form = ({ dispatch }) => {
     document.getElementById("form-event").reset();
   };
 
+  const handleSample = () => {
+    console.log("here");
+    setFirstName("John");
+    setLastName("Doe");
+    setEmail("bedzki@wp.pl");
+    setEvent("2020-07-07");
+
+    document.querySelector('[aria-label="firstName"]').value = "John";
+    document.querySelector('[aria-label="event"]').value = "2020-07-07";
+    document.querySelector('[aria-label="lastName"]').value = "Doe";
+    document.querySelector('[aria-label="email"]').value = "bedzki@wp.pl";
+    setValid("");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validEmail()) {
@@ -99,43 +113,50 @@ const Form = ({ dispatch }) => {
   return (
     <React.Fragment>
       <h3 className="page-title">Form:</h3>
-      <form
-        id="form-event"
-        className="event-form"
-        onSubmit={handleSubmit}
-        validate={valid}
-      >
-        {formPattern.map((item) => {
-          return (
-            <div key={item.id} className="row">
-              <label className="col title">{item.label}:</label>
-              <input
-                className={"col " + item.input.name}
-                aria-label={item.input.name}
-                name={item.input.name}
-                type={item.input.type}
-                value={item.input.value}
-                placeholder={item.input.placeholder}
-                onChange={(e) => handleUpdate(item.input.name, e.target.value)}
-                required={item.input.required}
-                min={date}
-                max={item.input.max}
-              />
-            </div>
-          );
-        })}
-
-        <button
-          className="button-submit"
-          aria-label="submit-button"
-          type="submit"
+      {submit === false && (
+        <form
+          id="form-event"
+          className="event-form"
+          onSubmit={handleSubmit}
+          validate={valid}
         >
-          Send
-        </button>
-        <button className="button-reset" type="reset" onClick={handleReset}>
-          Reset
-        </button>
-      </form>
+          {formPattern.map((item) => {
+            return (
+              <div key={item.id} className="row">
+                <label className="col title">{item.label}:</label>
+                <input
+                  className={"col " + item.input.name}
+                  aria-label={item.input.name}
+                  name={item.input.name}
+                  type={item.input.type}
+                  value={item.input.value}
+                  placeholder={item.input.placeholder}
+                  onChange={(e) =>
+                    handleUpdate(item.input.name, e.target.value)
+                  }
+                  required={item.input.required}
+                  min={date}
+                  max={item.input.max}
+                />
+              </div>
+            );
+          })}
+
+          <button
+            className="button-submit"
+            aria-label="submit-button"
+            type="submit"
+          >
+            Send
+          </button>
+          <button className="button-reset" type="reset" onClick={handleReset}>
+            Reset
+          </button>
+          <button className="button-reset" type="reset" onClick={handleSample}>
+            Sample
+          </button>
+        </form>
+      )}
     </React.Fragment>
   );
 };
