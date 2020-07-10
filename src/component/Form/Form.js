@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import TutorialDataService from "../../services/TutorialService";
 
 // Module Validation
-import validateEmaill from "../../validation/email/Email.js";
+import validateEmail from "../../validation/email/Email.js";
 
 // Date today
 import dateToday from "../../validation/date/Today.js";
@@ -13,13 +14,15 @@ import { toast } from "react-toastify";
 // Form Pattern
 import formPattern from "../../data/Form/form.js";
 
-const Form = ({ formReducer, dispatch }) => {
+const Form = ({ dispatch }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [event, setEvent] = useState("");
   const [date, setDate] = useState("2020-01-01");
+  const [today, setToday] = useState("2020-01-01");
   const [valid, setValid] = useState("");
+  const [submit, setSubmit] = useState("");
   // const [error, setError] = useState("");
 
   useEffect(() => {
@@ -27,11 +30,14 @@ const Form = ({ formReducer, dispatch }) => {
   }, []);
 
   const handleDate = () => {
-    setDate(dateToday);
+    var today = dateToday;
+    setToday(today);
+    setDate(today);
   };
 
   const validEmail = () => {
-    if (validateEmaill(email)) {
+    console.log("email", email);
+    if (validateEmail(email)) {
       setValid("");
       return true;
     } else {
@@ -42,39 +48,63 @@ const Form = ({ formReducer, dispatch }) => {
   };
 
   const handleUpdate = (name, value) => {
+    console.log("setting setting", name, value);
     if (name === "firstName") {
       setFirstName(value);
     } else if (name === "lastName") {
       setLastName(value);
     } else if (name === "email") {
+      console.log("email setting");
       setEmail(value);
     } else if (name === "event") {
       setEvent(value);
     }
   };
 
+  const handleReset = () => {
+    console.log("CLEANING", firstName, lastName, email, event);
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setEvent("");
+    setValid("");
+
+    console.log("AFTER  CLEANING", firstName, lastName, email, event);
+    document.getElementById("form-event").reset();
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (validEmail()) {
-      // Send data to reducer
-      dispatch({
-        type: "ADD_ALL",
-        payload: { firstName, lastName, email, event },
-      });
+      TutorialDataService.create({ firstName, lastName, email, event })
+        .then((response) => {
+          dispatch({
+            type: "ADD_ALL",
+            payload: { firstName, lastName, email, event },
+          });
 
-      // Send notification about send form
-      toast.success("Form send.");
+          // Send notification about send form
+          toast.success("Form send.");
 
-      // Clear form
-      e.target.reset();
+          handleReset();
+          console.log("RESPONSE DATA", response.data);
+        })
+        .catch((e) => {
+          var message = e.toJSON().message;
+          toast.error("Error: " + e.toJSON().message);
+        });
     }
   };
 
   return (
-    <>
+    <React.Fragment>
       <h3 className="page-title">Form:</h3>
-      <form className="event-form" onSubmit={handleSubmit} validate={valid}>
+      <form
+        id="form-event"
+        className="event-form"
+        onSubmit={handleSubmit}
+        validate={valid}
+      >
         {formPattern.map((item) => {
           return (
             <div key={item.id} className="row">
@@ -88,7 +118,6 @@ const Form = ({ formReducer, dispatch }) => {
                 placeholder={item.input.placeholder}
                 onChange={(e) => handleUpdate(item.input.name, e.target.value)}
                 required={item.input.required}
-                //min={item.input.min}
                 min={date}
                 max={item.input.max}
               />
@@ -103,8 +132,11 @@ const Form = ({ formReducer, dispatch }) => {
         >
           Send
         </button>
+        <button className="button-reset" type="reset" onClick={handleReset}>
+          Reset
+        </button>
       </form>
-    </>
+    </React.Fragment>
   );
 };
 
