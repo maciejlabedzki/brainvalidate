@@ -9,6 +9,8 @@
   box-sizing: border-box;
   overflow: hidden;
   background: #e4e4e4;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .error {
@@ -24,25 +26,38 @@ body {
   background: #e4e4e4;
 }
 
-//
+.page-title {
+  background: #bbbbbb;
+  margin: 0;
+  padding: 0;
+  line-height: 40px;
+  font-size: 25px;
+}
 
 .event-form {
+  padding: 10px;
+  border: 1px solid #bbbbbb;
+  .title {
+    background: #b9b9b9;
+  }
   &[validate*="novalid-email"] input.email {
     border: 1px solid red;
     background: #fff9f9;
   }
   .col {
     width: 100%;
-    background: white;
     display: block;
     float: left;
     margin-bottom: 8px;
     border: none;
+    height: 30px;
+    line-height: 30px;
+    font-weight: 600;
+    font-size: 16px;
   }
 
   input {
     padding: 5px 10px;
-    margin: 10px;
     box-sizing: border-box;
     overflow: hidden;
     width: calc(100% - 20px);
@@ -54,5 +69,34 @@ body {
     overflow: hidden;
     display: block;
     width: 100%;
+    background: #e4e4e4;
+  }
+  .button-submit {
+    width: 130px;
+    height: 40px;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin: 10px 0;
+    margin-right: 10px;
+  }
+  .button-reset {
+    width: 130px;
+    height: 40px;
+    font-size: 20px;
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+}
+
+// Media queries
+@media (min-width: 320px) {
+  .event-form {
+    .title {
+      text-align: right;
+      padding-right: 10px;
+    }
+    .col {
+      width: 50%;
+    }
   }
 }
